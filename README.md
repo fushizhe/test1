@@ -50,21 +50,21 @@ CodeGen代码自动生成工具
 所有的关于自动生成的配置项都应该在该元素下。
 
 <a name="ele2"/>
-##### <classPathEntry/>
+##### \<classPathEntry/\>
 该元素指明数据库驱动地址：
 ```
 <classPathEntry location="E:/Code/java5/mysql-connector-java-5.1.33.jar"/>
 ```
 
 <a name="ele3"/>
-##### <context>
+##### \<context\>
 该元素指明数据库驱动地址：
 ```
 <classPathEntry location="E:/Code/java5/mysql-connector-java-5.1.33.jar"/>
 ```
 
 <a name="ele4"/>
-##### <commentGenerator>
+##### \<commentGenerator\>
 该元素可以设置自动生成的注释的形式：
 ```
 <commentGenerator>
@@ -75,7 +75,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele5"/>
-##### <jdbcConnection>
+##### \<jdbcConnection\>
 该元素可以设置数据库的链接类，地址，用户名，密码：
 ```
 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.135:3306/demotest" userId="root" password="mysqlpwd">
@@ -83,7 +83,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele6"/>
-##### <javaTypeResolver>
+##### \<javaTypeResolver\>
 该元素可以用于指定一个用户提供的Java类型解析器：
 ```
 <javaTypeResolver>
@@ -92,7 +92,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele7"/>
-##### <javaTypeResolver>
+##### \<javaTypeResolver\>
 该元素可以用于指定一个用户提供的Java类型解析器：
 ```
 <javaModelGenerator targetPackage="com.canco.classification.model" targetProject="E:/Code/java5/TestProject">
@@ -102,7 +102,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele8"/>
-##### <sqlMapGenerator>
+##### \<sqlMapGenerator\>
 该元素可以用于指定生成映射文件的包名和位置：
 ```
 <sqlMapGenerator targetPackage="com.canco.classification.mapping" targetProject="E:/Code/java5/TestProject">
@@ -111,7 +111,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele9"/>
-##### <javaClientGenerator>
+##### \<javaClientGenerator\>
 该元素可以用于指定生成DAO的包名和位置：
 ```
 <javaClientGenerator type="XMLMAPPER" targetPackage="com.canco.classification.dao" targetProject="E:/Code/java5/TestProject">
@@ -120,7 +120,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele10"/>
-##### <projectProfile>
+##### \<projectProfile\>
 该元素可以用于指定生成的项目包名和位置：
 ```
 <projectProfile packageName="com.canco" projectName="E:/Code/java5/TestProject">
@@ -130,7 +130,7 @@ CodeGen代码自动生成工具
 <a name="tle"/>
 <a name="tle1"/>
 #### 表相关元素详解
-##### <table>
+##### \<table\>
 该元素用于配置要自动生成代码的表，针对每个表可以在其子元素内配置展示层的展示方式：
 ```
 <table tableName="asset_list" domainObjectName="AssetList" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
@@ -154,7 +154,7 @@ CodeGen代码自动生成工具
 </table>
 ```
 <a name="tle2"/>
-##### <listView>, <listElement>
+##### \<listView\>, \<listElement\>
 '<listView>'可以配置对应的数据库的一个表，通过子元素'<listElement>' 可以进一步排列表中每项的展示顺序、中英文名称。'<listElement>'用来配置列表中的每一项的属性，'attrName'表示对应数据库的字段名,'zhLabelName'代表该字段展示的中文名，'enLabelName'代表该字段展示的英文名，'order'代表该字段显示的顺序，'key'代表该字段是否为主键。
 ```
 <listElement>
@@ -168,7 +168,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="tle3"/>
-##### <editView>, <editElement>
+##### \<editView\>, \<editElement\>
 该元素用来配置编辑列表中的每一项的属性，'attrName'表示对应数据库的字段名,'order'代表该字段显示的顺序，'editType'代表编辑框类型，'placeholder'代表编辑框提示信息。
 ```
 <editView>
@@ -190,7 +190,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="tle4"/>
-##### <searchView>, <searchElement>
+##### \<searchView\>, \<searchElement\>
 该元素用来配置编辑列表中的每一项的属性，'attrName'表示对应数据库的字段名,'order'代表该字段显示的顺序，'editType'代表编辑框类型，'placeholder'代表编辑框提示信息。
 ```
 <searchView>
@@ -210,7 +210,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="tle5"/>
-##### <detailView>, <detailElement>
+##### \<detailView\>, \<detailElement\>
 该元素用来配置详细信息表中的每一项的属性，'attrName'表示对应数据库的字段名,'order'代表该字段显示的顺序，'tableName'代表对应的数据库表名，'isForeignKey'代表该字段是否有外键约束。
 ```
 <detailView>
@@ -239,7 +239,7 @@ CodeGen代码自动生成工具
 ```
 
 <a name="tle6"/>
-##### <ref-list>
+##### \<ref-list\>
 该元素用在关联表当中，每个子元素代表关联表的信息。
 ```
 <table tableName="stock_in_info_list" domainObjectName="StockInInfoList" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
