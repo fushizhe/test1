@@ -12,7 +12,7 @@ CodeGen代码自动生成工具
 2.	[示例](#usage2)
 
 #### [项目相关元素详解](#ele)
-1.	[<generatorConfiguration>](#ele1)
+1.	[\<generatorConfiguration\>](#ele1)
 2.	[<classPathEntry/>](#ele2)
 3.  [<context>](#ele3)
 4.	[<commentGenerator>](#ele4)
