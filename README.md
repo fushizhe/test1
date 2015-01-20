@@ -58,15 +58,15 @@ CodeGen代码自动生成工具
 
 <a name="ele3"/>
 ##### \<context\>
-该元素指明数据库驱动地址：
-```
-<classPathEntry location="E:/Code/java5/mysql-connector-java-5.1.33.jar"/>
+该元素指明数据库上下文：
+```xml
+<context id="DB2Tables" targetRuntime="MyBatis3" componentName="classification">
 ```
 
 <a name="ele4"/>
 ##### \<commentGenerator\>
 该元素可以设置自动生成的注释的形式：
-```
+```xml
 <commentGenerator>
     <property name="suppressDate" value="true"/>
     <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -77,7 +77,7 @@ CodeGen代码自动生成工具
 <a name="ele5"/>
 ##### \<jdbcConnection\>
 该元素可以设置数据库的链接类，地址，用户名，密码：
-```
+```xml
 <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.135:3306/demotest" userId="root" password="mysqlpwd">
 </jdbcConnection>
 ```
@@ -85,7 +85,7 @@ CodeGen代码自动生成工具
 <a name="ele6"/>
 ##### \<javaTypeResolver\>
 该元素可以用于指定一个用户提供的Java类型解析器：
-```
+```xml
 <javaTypeResolver>
   <property name="forceBigDecimals" value="false"/>
 </javaTypeResolver>
@@ -94,7 +94,7 @@ CodeGen代码自动生成工具
 <a name="ele7"/>
 ##### \<javaTypeResolver\>
 该元素可以用于指定一个用户提供的Java类型解析器：
-```
+```xml
 <javaModelGenerator targetPackage="com.canco.classification.model" targetProject="E:/Code/java5/TestProject">
   <property name="enableSubPackages" value="true"/>
   <property name="trimStrings" value="true"/>
@@ -104,7 +104,7 @@ CodeGen代码自动生成工具
 <a name="ele8"/>
 ##### \<sqlMapGenerator\>
 该元素可以用于指定生成映射文件的包名和位置：
-```
+```xml
 <sqlMapGenerator targetPackage="com.canco.classification.mapping" targetProject="E:/Code/java5/TestProject">
   <property name="enableSubPackages" value="true"/>
 </sqlMapGenerator>
@@ -113,7 +113,7 @@ CodeGen代码自动生成工具
 <a name="ele9"/>
 ##### \<javaClientGenerator\>
 该元素可以用于指定生成DAO的包名和位置：
-```
+```xml
 <javaClientGenerator type="XMLMAPPER" targetPackage="com.canco.classification.dao" targetProject="E:/Code/java5/TestProject">
   <property name="enableSubPackages" value="true"/>
 </javaClientGenerator>
@@ -122,7 +122,7 @@ CodeGen代码自动生成工具
 <a name="ele10"/>
 ##### \<projectProfile\>
 该元素可以用于指定生成的项目包名和位置：
-```
+```xml
 <projectProfile packageName="com.canco" projectName="E:/Code/java5/TestProject">
 </projectProfile>
 ```
@@ -132,7 +132,7 @@ CodeGen代码自动生成工具
 #### 表相关元素详解
 ##### \<table\>
 该元素用于配置要自动生成代码的表，针对每个表可以在其子元素内配置展示层的展示方式：
-```
+```xml
 <table tableName="asset_list" domainObjectName="AssetList" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
   <listView>
     <listElement>
@@ -156,7 +156,7 @@ CodeGen代码自动生成工具
 <a name="tle2"/>
 ##### \<listView\>, \<listElement\>
 '<listView>'可以配置对应的数据库的一个表，通过子元素'<listElement>' 可以进一步排列表中每项的展示顺序、中英文名称。'<listElement>'用来配置列表中的每一项的属性，'attrName'表示对应数据库的字段名,'zhLabelName'代表该字段展示的中文名，'enLabelName'代表该字段展示的英文名，'order'代表该字段显示的顺序，'key'代表该字段是否为主键。
-```
+```xml
 <listElement>
   <property name="attrName" value="asset_id"/>
   <property name="labelName" value="asset.id"/>
@@ -170,7 +170,7 @@ CodeGen代码自动生成工具
 <a name="tle3"/>
 ##### \<editView\>, \<editElement\>
 该元素用来配置编辑列表中的每一项的属性，'attrName'表示对应数据库的字段名,'order'代表该字段显示的顺序，'editType'代表编辑框类型，'placeholder'代表编辑框提示信息。
-```
+```xml
 <editView>
   <editElement>
     <property name="attrName" value="username"/>
@@ -192,7 +192,7 @@ CodeGen代码自动生成工具
 <a name="tle4"/>
 ##### \<searchView\>, \<searchElement\>
 该元素用来配置编辑列表中的每一项的属性，'attrName'表示对应数据库的字段名,'order'代表该字段显示的顺序，'editType'代表编辑框类型，'placeholder'代表编辑框提示信息。
-```
+```xml
 <searchView>
   <searchElement>
     <property name="attrName" value="username"/>
@@ -212,7 +212,7 @@ CodeGen代码自动生成工具
 <a name="tle5"/>
 ##### \<detailView\>, \<detailElement\>
 该元素用来配置详细信息表中的每一项的属性，'attrName'表示对应数据库的字段名,'order'代表该字段显示的顺序，'tableName'代表对应的数据库表名，'isForeignKey'代表该字段是否有外键约束。
-```
+```xml
 <detailView>
   <detailElement>
     <property name="attrName" value="username"/>
@@ -241,7 +241,7 @@ CodeGen代码自动生成工具
 <a name="tle6"/>
 ##### \<ref-list\>
 该元素用在关联表当中，每个子元素代表关联表的信息。
-```
+```xml
 <table tableName="stock_in_info_list" domainObjectName="StockInInfoList" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
   <ref-list>
     <ref name="StockInList">
