@@ -52,7 +52,7 @@ CodeGen代码自动生成工具
 <a name="ele2"/>
 ##### \<classPathEntry/\>
 该元素指明数据库驱动地址：
-```
+```xml
 <classPathEntry location="E:/Code/java5/mysql-connector-java-5.1.33.jar"/>
 ```
 
