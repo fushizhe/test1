@@ -9,7 +9,7 @@ CodeGen代码自动生成工具
 ### 目录
 #### [使用方法](#usage)
 1.	[概述](#usage1)
-2.	[示例](#usage2)
+2.	[整体架构](#usage2)
 
 #### [项目相关元素详解](#ele)
 1.	[\<generatorConfiguration\>](#ele1)
@@ -40,8 +40,10 @@ CodeGen代码自动生成工具
   开发人员只需要配置一个单独的XML文件，指明所需生成的框架的相关参数，执行程序，框架代码即可生成。
 
 <a name="usage2"/>
-#### 示例
-  一个典型的配置文件如下
+##### 整体架构
+  CodeGen代码自动生成工具的整体架构图：
+
+![alt text](http://image16-c.poco.cn/mypoco/myphoto/20150121/14/6445810220150121145234015.png?778x398_130 "架构")
 
 <a name="ele"/>
 <a name="ele1"/>
