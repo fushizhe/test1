@@ -157,7 +157,7 @@ CodeGen代码自动生成工具
 ```
 <a name="tle2"/>
 ##### \<listView\>, \<listElement\>
-'<listView>'可以配置对应的数据库的一个表，通过子元素'<listElement>' 可以进一步排列表中每项的展示顺序、中英文名称。'<listElement>'用来配置列表中的每一项的属性，'attrName'表示对应数据库的字段名,'zhLabelName'代表该字段展示的中文名，'enLabelName'代表该字段展示的英文名，'order'代表该字段显示的顺序，'key'代表该字段是否为主键。
+`<listView>`可以配置对应的数据库的一个表，通过子元素'<listElement>' 可以进一步排列表中每项的展示顺序、中英文名称。'<listElement>'用来配置列表中的每一项的属性，'attrName'表示对应数据库的字段名,'zhLabelName'代表该字段展示的中文名，'enLabelName'代表该字段展示的英文名，'order'代表该字段显示的顺序，'key'代表该字段是否为主键。
 ```xml
 <listElement>
   <property name="attrName" value="asset_id"/>
