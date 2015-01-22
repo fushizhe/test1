@@ -35,6 +35,8 @@ CodeGen代码自动生成工具
 1.  [Java模板文件](#tpte1)
 2.  [页面模板文件](#tpte2)
 
+#### [示例](#ex)
+
 
 <a name="usage"/>
 <a name="usage1"/>
@@ -97,8 +99,8 @@ CodeGen代码自动生成工具
 ```
 
 <a name="ele7"/>
-##### \<javaTypeResolver\>
-该元素可以用于指定一个用户提供的Java类型解析器：
+##### \<javaModelGenerator\>
+该元素可以用于指定生成模型的包名和位置：
 ```xml
 <javaModelGenerator targetPackage="com.canco.classification.model" targetProject="E:/Code/java5/TestProject">
   <property name="enableSubPackages" value="true"/>
@@ -264,5 +266,11 @@ CodeGen代码自动生成工具
 #### 模板配置
 ##### Java模板文件
 
+
+
+
 <a name="tpte2"/>
 ##### 页面模板文件
+
+<a name="ex"/>
+##### 示例
