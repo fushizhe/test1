@@ -31,9 +31,22 @@ CodeGen代码自动生成工具
 5.  [\<detailView\>, \<detailElement\>](#tle5)
 6.  [\<ref-list\>](#tle6)
 
-#### [模板配置](#tpte)
-1.  [Java模板文件](#tpte1)
-2.  [页面模板文件](#tpte2)
+#### [Java模板文件配置](#jtp)
+1.  [\<packageName\>](#jtp1)
+2.  [\<componentName\>](#jtp2)
+3.  [\<basePath\>](#jtp3)
+4.  [\<uentity\>](#jtp4)
+5.  [\<lentity\>](#jtp5)
+6.  [\<refVariables\>](#jtp6)
+7.  [\<refParameters\>](#jtp7)
+8.  [数据库相关](#jtp8)
+
+#### [页面模板文件](#ptp)
+1.  [\<colNames\>](#ptp1)
+2.  [\<colModel\>](#ptp2)
+3.  [\<sortname\>](#ptp3)
+4.  [\<searchParameterLines\>](#ptp4)
+5.  [\<searchParameters\>](#ptp5)
 
 #### [示例](#ex)
 
@@ -176,7 +189,7 @@ CodeGen代码自动生成工具
 
 <a name="tle3"/>
 ##### \<editView\>, \<editElement\>
-该元素用来配置编辑列表中的每一项的属性，`attrName'表示对应数据库的字段名,`order`代表该字段显示的顺序，`editType`代表编辑框类型，`placeholder`代表编辑框提示信息。
+该元素用来配置编辑列表中的每一项的属性，`attrName`表示对应数据库的字段名,`order`代表该字段显示的顺序，`editType`代表编辑框类型，`placeholder`代表编辑框提示信息。
 ```xml
 <editView>
   <editElement>
@@ -261,16 +274,190 @@ CodeGen代码自动生成工具
 </table>
 ```
 
-<a name="tpte"/>
-<a name="tpte1"/>
-#### 模板配置
-##### Java模板文件
+<a name="jtp"/>
+<a name="jtp1"/>
+#### Java模板文件配置
+##### \<packageName\>
+该标签用于表示项目基本的信息
+```java
+package ${packageName}.${componentName}.controller;
+
+import ${packageName}.${componentName}.model.${uentity};
+import ${packageName}.${componentName}.service.${uentity}Service;
+import ${packageName}.common.util.DataEditResponse;
+import ${packageName}.common.util.DataRequest;
+import ${packageName}.common.util.DataSearchResponse;
+import ${packageName}.common.util.UtilMethod;
+```
+
+<a name="jtp2"/>
+##### \<componentName\>
+该标签用于表示模块名
+```java
+package ${packageName}.${componentName}.controller;
+
+import ${packageName}.${componentName}.model.${uentity};
+import ${packageName}.${componentName}.service.${uentity}Service;
+import ${packageName}.common.util.DataEditResponse;
+import ${packageName}.common.util.DataRequest;
+import ${packageName}.common.util.DataSearchResponse;
+import ${packageName}.common.util.UtilMethod;
+```
+
+<a name="jtp3"/>
+##### \<basePath\>
+该标签用于表示项目的根路径：
+```xml
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  <property name="dataSource" ref="mySqlDataSource" />
+  <property name="typeAliasesPackage" value="${packageName}.*.model" />
+  <!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
+  <!-- 显式指定Mapper文件位置 -->
+  <property name="mapperLocations" value="classpath:${basePath}/*/mapper/*.xml" />
+</bean>
+```
+
+<a name="jtp4"/>
+##### \<refVariables\>
+该标签用于生成所关联的表的Mapper对象的声明以及相应的getter，setter代码：
+```java
+@Resource(name="${uentity}Mapper")
+public void set${uentity}Mapper(${uentity}Mapper ${lentity}Mapper) {
+    this.${lentity}Mapper = ${lentity}Mapper;
+}
+
+${refVariables}
+```
+
+<a name="jtp5"/>
+##### \<refParameters\>
+该标签用于生成在方法中的参数中用到的关联表的对象，比如User user, ClassList classList这种会放在方法参数中的代码：
+```java
+public interface ${uentity}Service {
+
+    /*
+   * 添加一条记录
+   * @param stockInInfoList
+   * @return int
+   */
+    public int add(${uentity} ${lentity}${refParameters});
+
+    /**
+     * 删除一条关联数据
+     * @param stockInInfoId
+     * @return
+     */
+    public int delete(int id);
+
+    /**
+     * 更新一条关联数据和入库数据
+     * @param stockInList
+     * @param stockInInfoList
+     * @param assetList
+     * @return
+     */
+    public int update(${uentity} ${lentity}${refParameters});
+}
+```
+
+<a name="jtp6"/>
+##### 数据库相关
+数据库相关信息，用在jdbc.properties
+```java
+jdbc.url=${jdbcUrl}
+jdbc.driverClassName=${driverClassName}
+jdbc.username=${username}
+jdbc.password=${password}
+```
+mybatis-config.xml中有一个配置，生成类型别名映射：
+使用了basicInfo这是一个列表，里面每一个Item对应一个实体，分别显示实例名和类名，就是lentity和uentity，如：
+```java
+<#list basicInfo as being>
+  <typeAlias alias="${being.instanceName}" type="${packageName}.${componentName}.model.${being.className}" />
+</#list>
+```
+
+假设用户选择了class_list这个表，对应的代码生成后是：
+```xml
+<typeAliases>
+  <typeAlias alias="classList" type="com.canco.classification.model.ClassList" />
+</typeAliases>
+```
 
 
-
-
-<a name="tpte2"/>
+<a name="ptp"/>
 ##### 页面模板文件
+<a name="ptp1"/>
+###### \<colNames\>
+该标签表示列表的表头，如'ID', '资产名','状态名','创建人','创建日期'
+
+<a name="ptp2"/>
+###### \<colNames\>
+该标签表示列表的内容，如`{name: 'className', index: 'className', width: 200, sortable: true, align:"left", editable:true}`，每一行代表一个列项
+```Javascript
+$("#tableList").jqGrid({
+          //@CodeGen begin
+          url: '${lentity}SelectM',
+          editurl: '${lentity}Edit',
+          colNames: [
+      //'ID', '资产名','状态名','创建人','创建日期'
+      ${colNames}
+    ],
+          colModel: [
+              //{name: 'classId', index: 'classId', width: 100, sortable: true, key:true, hidden:true},
+              //{name: 'className', index: 'className', width: 200, sortable: true, align:"left", editable:true},
+              //{name: 'defaultStatName', index: 'defaultStatName', width: 200, sortable: true, align:"left", editable:true},
+              //{name: 'createMan', index: 'createMan', width: 200, sortable: true, align:"left", editable:true},
+              //{name: 'createDate', index: 'createDate', width: 200, sortable: true, align:"left", editable:false}
+      ${colModel}
+          ],
+          jsonReader : {
+              page: "currentpage",
+              total: "totalpage",
+              records: "records",
+              root: "rows",     //返回数据
+              userdata: "userdata" //其他参数
+          },
+          caption: "数据列表", //表格名称
+          sortname: '${sortname}',
+          sortorder: "desc",
+          //@CodeGen end
+          pager: '#pager',
+          rowNum: 10,
+          rowList: [10, 20, 30, 50],
+          viewrecords: true, //总记录数
+          multiselect: true, //多选
+          autowidth: true,
+          hidegrid: false,
+          mtype: 'POST',
+          datatype: "json",
+          height: '300px'
+      });
+```
+
+<a name="ptp4"/>
+###### \<searchParameterLines\>
+该标签用于获取搜索控件里面内容的代码，js中用于搜索的代码。
+
+<a name="ptp5"/>
+###### \<searchParameters\>
+和searchParameterLines搭配使用，使用searchParameterLines中获取的值，拼接url。使用上述两个配置项，js模板代码如下：
+```Javascript
+function gridReload(){
+        ${searchParameterLines}
+  $("#tableList").jqGrid('setGridParam',{url:"${lentity}SelectM?${searchParameters}, page:1}).trigger("reloadGrid");
+}
+```
+
+假设用户配置的搜索字段为：className和defaultStatName，那么对应的生成的代码如下：
+```Javascript
+function gridReload(){
+  var var0 = $("#search_className").val();
+  var var1 = $("#search_defaultStatName").val();
+
+  $("#tableList").jqGrid('setGridParam',{url:"classListSelectM?className="+var0+"&defaultStatName="+var1, page:1}).trigger("reloadGrid");
+}
+```
 
 <a name="ex"/>
 ##### 示例
