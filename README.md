@@ -316,8 +316,15 @@ import ${packageName}.common.util.UtilMethod;
   <property name="mapperLocations" value="classpath:${basePath}/*/mapper/*.xml" />
 </bean>
 ```
-
 <a name="jtp4"/>
+##### \<uentity\>
+该标签用于表示开头大写的实体名，如User。
+
+<a name="jtp5"/>
+##### \<lentity\>
+该标签用于表示开头大写的实体名，如User。
+
+<a name="jtp6"/>
 ##### \<refVariables\>
 该标签用于生成所关联的表的Mapper对象的声明以及相应的getter，setter代码：
 ```java
@@ -329,7 +336,7 @@ public void set${uentity}Mapper(${uentity}Mapper ${lentity}Mapper) {
 ${refVariables}
 ```
 
-<a name="jtp5"/>
+<a name="jtp7"/>
 ##### \<refParameters\>
 该标签用于生成在方法中的参数中用到的关联表的对象，比如User user, ClassList classList这种会放在方法参数中的代码：
 ```java
@@ -360,7 +367,7 @@ public interface ${uentity}Service {
 }
 ```
 
-<a name="jtp6"/>
+<a name="jtp8"/>
 ##### 数据库相关
 数据库相关信息，用在jdbc.properties
 ```java
