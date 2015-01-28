@@ -398,6 +398,10 @@ mybatis-config.xml中有一个配置，生成类型别名映射：
 ###### \<colNames\>
 该标签表示列表的表头，如'ID', '资产名','状态名','创建人','创建日期'
 
+<a name="ptp3"/>
+###### \<sortname\>
+该标签表示排序的键，如id，该项为jqGrid要求。
+
 <a name="ptp2"/>
 ###### \<colNames\>
 该标签表示列表的内容，如`{name: 'className', index: 'className', width: 200, sortable: true, align:"left", editable:true}`，每一行代表一个列项
