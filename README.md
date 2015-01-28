@@ -472,3 +472,120 @@ function gridReload(){
 
 <a name="ex"/>
 ##### 示例
+以下是一个具体的配置文件示例
+```Javascript
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+<!-- 数据库驱动-->
+  <!--<classPathEntry location="D:/mysql-connector-java-5.1.18-bin.jar"/>-->
+  <classPathEntry location="D:/ojdbc14.jar"/>
+  <!--数据库链接URL，用户名、密码 -->
+  <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.135:3306/demotest" userId="canco" password="123">
+  </jdbcConnection>
+    <!--<jdbcConnection driverClass="com.sybase.jdbc3.jdbc.SybDriver"
+      connectionURL="jdbc:sybase:Tds:192.168.1.132:2638" userId="canco" password="123" />-->
+    <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+      connectionURL="jdbc:oracle:thin:@192.168.1.132:1521:EAM" 
+      userId="canco" password="123" />-->
+    <!--工程基本路径和包名-->
+  <projectProfile type="Maven" packageName="com.canco" projectName="D:/Projects/JavaEE/SSM" welcomeFile="/WEB-INF/pages/registration/login.jsp">
+  </projectProfile>
+  <context id="registration"  targetRuntime="MyBatis3" componentName="registration" innerComponent="registration">
+    <commentGenerator>
+      <property name="suppressDate" value="true"/>
+      <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    <!-- 生成模型的包名和位置-->
+    <javaModelGenerator>
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <!-- 生成映射文件的包名和位置-->
+    <sqlMapGenerator>
+    </sqlMapGenerator>
+    <!-- 生成DAO的包名和位置-->
+    <javaClientGenerator type="XMLMAPPER">
+    </javaClientGenerator>
+
+    <table tableName="users" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+    </table>
+  </context>
+  <context id="DB2Tables" targetRuntime="MyBatis3" componentName="classification">
+    <commentGenerator>
+      <property name="suppressDate" value="true"/>
+      <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    <!-- 生成模型的包名和位置-->
+    <javaModelGenerator>
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <!-- 生成映射文件的包名和位置-->
+    <sqlMapGenerator>
+    </sqlMapGenerator>
+    <!-- 生成DAO的包名和位置-->
+    <javaClientGenerator type="XMLMAPPER">
+    </javaClientGenerator>
+
+    <table tableName="class_list" domainObjectName="ClassList" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+      <listView>
+        <listElement>
+          <property name="attrName" value="class_id"/>
+          <property name="labelName" value="classList.id"/>
+          <property name="zhLabelName" value="编号"/>
+          <property name="enLabelName" value="ID"/>
+          <property name="order" value="1"/>
+          <property name="key" value="true"/>
+        </listElement>
+        <listElement>
+          <property name="attrName" value="class_name"/>
+          <property name="zhLabelName" value="名称"/>
+          <property name="enLabelName" value="Class Name"/>
+          <property name="labelName" value="classList.name"/>
+          <property name="order" value="2"/>
+        </listElement>
+        <listElement>
+          <property name="attrName" value="default_stat_name"/>
+          <property name="zhLabelName" value="默认状态"/>
+          <property name="enLabelName" value="Default State Name"/>
+          <property name="labelName" value="classList.stateName"/>
+          <property name="order" value="3"/>
+        </listElement>
+      </listView>
+      <searchView>
+        <searchElement>
+          <property name="attrName" value="class_name"/>
+          <property name="zhLabelName" value="名称"/>
+          <property name="enLabelName" value="Class Name"/>
+          <property name="labelName" value="classList.name"/>
+          <property name="placeholder" value="classList.name.placeholder"/>
+          <property name="zhPlaceholder" value="请输入名称"/>
+          <property name="enPlaceholder" value="Input Class Name"/>
+          <property name="order" value="2"/>
+        </searchElement>
+        <searchElement>
+          <property name="attrName" value="default_stat_name"/>
+          <property name="zhLabelName" value="默认状态"/>
+          <property name="enLabelName" value="Default State Name"/>
+          <property name="labelName" value="classList.stateName"/>
+          <property name="placeholder" value="classList.stateName.placeholder"/>
+          <property name="zhPlaceholder" value="请输入默认状态"/>
+          <property name="enPlaceholder" value="Input Default State Name"/>
+          <property name="order" value="3"/>
+        </searchElement>
+      </searchView>
+      </table>
+  </context>
+</generatorConfiguration>
+```
+这个配置文件分成两个部分，一个是基本的信息，包括驱动包的位置，jdbc连接，工程基本信息。第二个部分可以有多个context，就是多个模块，context里面的两个属性，模块名是必须的，innerComponent可有可无。innerComponent指要是用内部的功能组件，比如登录注册这样一个，制定了之后，就会直接用，不会去做其他的事情。只需指明用哪个table作为用户表即可。例如上例中的context，是用的是class_list这样一个表，需要做增删改查所以需要有那些view。
+使用方法就是给定配置路径，模板路径，新建一个空的j2ee工程，并以其配置到配置文件中，运行即可。
